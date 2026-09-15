@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:18                  # (1) quelle version ? pas "latest"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}                # (2) l'utilisateur à créer
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}               # (2) son mot de passe
+      POSTGRES_DB: ${POSTGRES_DB}                     # (2) le nom de la base à créer
+    ports:
+      - "5432:5432"                          # (3) port sur TA machine : port dans le conteneur
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro                      # (4a) tes scripts SQL -> dossier d'init de Postgres
+      - prot_api_data:/var/lib/postgresql      # (4b) volume nommé -> données persistées
+
+volumes:
+  prot_api_data:                                      # (4b) déclare ici le volume nommé utilisé au-dessus

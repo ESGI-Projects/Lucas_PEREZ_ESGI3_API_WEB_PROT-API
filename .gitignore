@@ -1,0 +1,13 @@
+# Secrets
+.env
+
+# Dépendances Node (S2)
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Fichiers système / éditeur
+.DS_Store
+.vscode/
