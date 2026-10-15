@@ -1,0 +1,46 @@
+Capture UTC : 2026-10-15T08:54:37.414286+00:00
+Commande : docker compose --profile test run --build --rm tests
+
+> salle-de-sport-api@1.0.0 db:migrate
+> tsx scripts/migrate.ts
+
+
+> salle-de-sport-api@1.0.0 check
+> tsc --noEmit && tsc -p tsconfig.tests.json
+
+
+> salle-de-sport-api@1.0.0 test
+> tsx --test --test-concurrency=1 tests/integration/*.test.ts
+
+✔ CRUD adhérents : Location, PUT complet, PATCH partiel, DELETE et 404 (102.937573ms)
+✔ validation : détail multi-champs, champs inconnus et PATCH vide (15.242048ms)
+✔ JSON illisible 400, Content-Type 415, identifiant et route invalides (11.750728ms)
+✔ CRUD cours : remplacement, patch, précondition, suppression et relation protégée (59.623885ms)
+✔ ETag : 304 vide, évolution du tag et 412 sur écriture obsolète (28.998933ms)
+✔ ETag concurrent : une seule écriture peut utiliser la même version (26.946806ms)
+✔ planning : filtres combinés, tri stable, liens conservant les paramètres (33.619852ms)
+✔ créneau : durée et période validées ; capacité figée à la création (23.299346ms)
+✔ deux adhérents sur la dernière place : une confirmation, une attente (68.226075ms)
+✔ même adhérent concurrent : un 201, un 409 problem+json (58.769673ms)
+✔ quota concurrent sur deux créneaux différents : une seule confirmation (61.351549ms)
+✔ abonnement absent, quota atteint, fenêtre trop tôt et créneau passé (41.95526ms)
+✔ formule illimitée : aucune limite hebdomadaire malgré la valeur du kit (29.460195ms)
+✔ annulation : promotion FIFO atomique et répétition sans seconde promotion (37.803254ms)
+✔ promotion : retrait motivé du premier devenu inéligible (33.865597ms)
+✔ annulation attente ne libère pas de place et permet une réinscription (31.460134ms)
+✔ curseur : précision microseconde, insertion avant la page, aucun doublon ni saut (34.149657ms)
+✔ contraintes SQL : doublons actifs et chevauchement abonnements refusés (22.770026ms)
+✔ consultations de référence : enveloppe commune et suppression protégée (31.041252ms)
+✔ offset comparé au curseur : une insertion décale la deuxième page (41.375591ms)
+✔ semaine de Paris : deux UTC de dates différentes peuvent relever du même lundi (30.480708ms)
+✔ annulations concurrentes : historique cohérent, une seule promotion (41.364742ms)
+✔ limites de fenêtre et heure d’hiver : sept jours calendaires en Europe/Paris (6.119922ms)
+✔ promotions concurrentes sur deux créneaux : le quota de l’attente reste protégé (57.400745ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1418.650998

@@ -1,0 +1,612 @@
+{
+  "info": {
+    "name": "Salle de sport — S1 à S4",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Adapter les identifiants et dates avec la sortie de la commande demo. Copier les ETag exacts, guillemets compris. Les scénarios concurrents sont exécutés par npm run demo."
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://192.168.50.117:3000",
+      "type": "string"
+    },
+    {
+      "key": "adherent_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "cours_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "coach_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "creneau_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "reservation_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "attente_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "jour",
+      "value": "2026-10-16",
+      "type": "string"
+    },
+    {
+      "key": "debut",
+      "value": "2026-10-16T16:00:00Z",
+      "type": "string"
+    },
+    {
+      "key": "fin",
+      "value": "2026-10-16T17:00:00Z",
+      "type": "string"
+    },
+    {
+      "key": "etag",
+      "value": "\"cours-1-v1\"",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "00 - Démarrage",
+      "item": [
+        {
+          "name": "Santé",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/health",
+            "description": "Santé"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "01 - Adhérents",
+      "item": [
+        {
+          "name": "Créer (201 + Location)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/adherents",
+            "description": "Créer (201 + Location)",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Camille Démo\",\n  \"email\": \"camille-demo@example.org\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Liste paginée",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/adherents?page=1&limit=5",
+            "description": "Liste paginée"
+          },
+          "response": []
+        },
+        {
+          "name": "Fiche",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/adherents/{{adherent_id}}",
+            "description": "Fiche"
+          },
+          "response": []
+        },
+        {
+          "name": "Remplacer intégralement",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/adherents/{{adherent_id}}",
+            "description": "Remplacer intégralement",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Camille Remplacement\",\n  \"email\": \"camille-remplacement@example.org\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier le nom seulement",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/adherents/{{adherent_id}}",
+            "description": "Modifier le nom seulement",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Camille Modification\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer un adhérent sans relation",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{base_url}}/adherents/{{adherent_id}}",
+            "description": "Supprimer un adhérent sans relation"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 - Cours",
+      "item": [
+        {
+          "name": "Créer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/cours",
+            "description": "Créer",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Pilates démo\",\n  \"coach_id\": 1,\n  \"capacite\": 10,\n  \"jour_semaine\": 5,\n  \"heure_debut\": \"18:00\",\n  \"duree_min\": 60,\n  \"periode_debut\": \"2026-10-01\",\n  \"periode_fin\": \"2027-12-31\",\n  \"fuseau\": \"Europe/Paris\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Liste",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/cours?limit=5",
+            "description": "Liste"
+          },
+          "response": []
+        },
+        {
+          "name": "Fiche et ETag à copier",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/cours/{{cours_id}}",
+            "description": "Fiche et ETag à copier"
+          },
+          "response": []
+        },
+        {
+          "name": "Cache 304",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "If-None-Match",
+                "value": "{{etag}}"
+              }
+            ],
+            "url": "{{base_url}}/cours/{{cours_id}}",
+            "description": "Cache 304"
+          },
+          "response": []
+        },
+        {
+          "name": "Remplacement conditionnel",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "If-Match",
+                "value": "{{etag}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/cours/{{cours_id}}",
+            "description": "Remplacement conditionnel",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Pilates démo\",\n  \"coach_id\": 1,\n  \"capacite\": 10,\n  \"jour_semaine\": 5,\n  \"heure_debut\": \"18:00\",\n  \"duree_min\": 60,\n  \"periode_debut\": \"2026-10-01\",\n  \"periode_fin\": \"2027-12-31\",\n  \"fuseau\": \"Europe/Paris\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modification conditionnelle puis 412 au rejeu",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "If-Match",
+                "value": "{{etag}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/cours/{{cours_id}}",
+            "description": "Modification conditionnelle puis 412 au rejeu",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Yoga conditionnel\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Suppression (409 si occurrences)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{base_url}}/cours/{{cours_id}}",
+            "description": "Suppression (409 si occurrences)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 - Planning",
+      "item": [
+        {
+          "name": "Planning filtré et trié",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/creneaux?cours={{cours_id}}&coach={{coach_id}}&jour={{jour}}&tri=debut,id&ordre=asc&limit=5",
+            "description": "Planning filtré et trié"
+          },
+          "response": []
+        },
+        {
+          "name": "Occurrences du cours",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/cours/{{cours_id}}/creneaux",
+            "description": "Occurrences du cours"
+          },
+          "response": []
+        },
+        {
+          "name": "Fiche créneau",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/creneaux/{{creneau_id}}",
+            "description": "Fiche créneau"
+          },
+          "response": []
+        },
+        {
+          "name": "Créer une occurrence",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/cours/{{cours_id}}/creneaux",
+            "description": "Créer une occurrence",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"debut\": \"{{debut}}\",\n  \"fin\": \"{{fin}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 - Réservations",
+      "item": [
+        {
+          "name": "Réserver (confirmation ou attente)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/creneaux/{{creneau_id}}/reservations",
+            "description": "Réserver (confirmation ou attente)",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"adherent_id\": {{adherent_id}} }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Historique par curseur (suivre links.next)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/reservations?creneau={{creneau_id}}&limit=1",
+            "description": "Historique par curseur (suivre links.next)"
+          },
+          "response": []
+        },
+        {
+          "name": "Historique offset pour comparaison",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/reservations?creneau={{creneau_id}}&page=1&limit=1",
+            "description": "Historique offset pour comparaison"
+          },
+          "response": []
+        },
+        {
+          "name": "Fiche réservation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/reservations/{{reservation_id}}",
+            "description": "Fiche réservation"
+          },
+          "response": []
+        },
+        {
+          "name": "Annuler et promouvoir",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/reservations/{{reservation_id}}",
+            "description": "Annuler et promouvoir",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"statut\": \"annulee\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Liste attente et rangs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/listes_attente?creneau={{creneau_id}}",
+            "description": "Liste attente et rangs"
+          },
+          "response": []
+        },
+        {
+          "name": "Fiche attente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/listes_attente/{{attente_id}}",
+            "description": "Fiche attente"
+          },
+          "response": []
+        },
+        {
+          "name": "Retirer une attente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{base_url}}/listes_attente/{{attente_id}}",
+            "description": "Retirer une attente"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 - Références",
+      "item": [
+        {
+          "name": "Abonnements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/abonnements?limit=5",
+            "description": "Abonnements"
+          },
+          "response": []
+        },
+        {
+          "name": "Coachs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/coachs?limit=5",
+            "description": "Coachs"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "06 - Erreurs",
+      "item": [
+        {
+          "name": "422 multi-champs",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/adherents",
+            "description": "422 multi-champs",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"\",\n  \"email\": \"invalide\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "400 JSON illisible",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/adherents",
+            "description": "400 JSON illisible",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nom\":",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "400 dates non parsables",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/creneaux?from=hier&to=demain",
+            "description": "400 dates non parsables"
+          },
+          "response": []
+        },
+        {
+          "name": "404 absent",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/creneaux/2147483647",
+            "description": "404 absent"
+          },
+          "response": []
+        },
+        {
+          "name": "422 PUT incomplet",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/adherents/{{adherent_id}}",
+            "description": "422 PUT incomplet",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Incomplet\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+# Remplacer les identifiants/dates avec la sortie de la démonstration.
+# Pour les CRUD, utiliser une ressource créée pour ce parcours, sans historique.
+@base_url = http://192.168.50.117:3000
+@adherent_id = 1
+@cours_id = 1
+@coach_id = 1
+@creneau_id = 1
+@reservation_id = 1
+@attente_id = 1
+@jour = 2026-10-16
+@debut = 2026-10-16T16:00:00Z
+@fin = 2026-10-16T17:00:00Z
+@etag = "cours-1-v1"
+
+### Santé
+GET {{base_url}}/health
+
+### Créer (201 + Location)
+POST {{base_url}}/adherents
+Content-Type: application/json
+
+{
+  "nom": "Camille Démo",
+  "email": "camille-demo@example.org"
+}
+
+### Liste paginée
+GET {{base_url}}/adherents?page=1&limit=5
+
+### Fiche
+GET {{base_url}}/adherents/{{adherent_id}}
+
+### Remplacer intégralement
+PUT {{base_url}}/adherents/{{adherent_id}}
+Content-Type: application/json
+
+{
+  "nom": "Camille Remplacement",
+  "email": "camille-remplacement@example.org"
+}
+
+### Modifier le nom seulement
+PATCH {{base_url}}/adherents/{{adherent_id}}
+Content-Type: application/json
+
+{
+  "nom": "Camille Modification"
+}
+
+### Supprimer un adhérent sans relation
+DELETE {{base_url}}/adherents/{{adherent_id}}
+
+### Créer
+POST {{base_url}}/cours
+Content-Type: application/json
+
+{
+  "type": "Pilates démo",
+  "coach_id": 1,
+  "capacite": 10,
+  "jour_semaine": 5,
+  "heure_debut": "18:00",
+  "duree_min": 60,
+  "periode_debut": "2026-10-01",
+  "periode_fin": "2027-12-31",
+  "fuseau": "Europe/Paris"
+}
+
+### Liste
+GET {{base_url}}/cours?limit=5
+
+### Fiche et ETag à copier
+GET {{base_url}}/cours/{{cours_id}}
+
+### Cache 304
+GET {{base_url}}/cours/{{cours_id}}
+If-None-Match: {{etag}}
+
+### Remplacement conditionnel
+PUT {{base_url}}/cours/{{cours_id}}
+If-Match: {{etag}}
+Content-Type: application/json
+
+{
+  "type": "Pilates démo",
+  "coach_id": 1,
+  "capacite": 10,
+  "jour_semaine": 5,
+  "heure_debut": "18:00",
+  "duree_min": 60,
+  "periode_debut": "2026-10-01",
+  "periode_fin": "2027-12-31",
+  "fuseau": "Europe/Paris"
+}
+
+### Modification conditionnelle puis 412 au rejeu
+PATCH {{base_url}}/cours/{{cours_id}}
+If-Match: {{etag}}
+Content-Type: application/json
+
+{
+  "type": "Yoga conditionnel"
+}
+
+### Suppression (409 si occurrences)
+DELETE {{base_url}}/cours/{{cours_id}}
+
+### Planning filtré et trié
+GET {{base_url}}/creneaux?cours={{cours_id}}&coach={{coach_id}}&jour={{jour}}&tri=debut,id&ordre=asc&limit=5
+
+### Occurrences du cours
+GET {{base_url}}/cours/{{cours_id}}/creneaux
+
+### Fiche créneau
+GET {{base_url}}/creneaux/{{creneau_id}}
+
+### Créer une occurrence
+POST {{base_url}}/cours/{{cours_id}}/creneaux
+Content-Type: application/json
+
+{
+  "debut": "{{debut}}",
+  "fin": "{{fin}}"
+}
+
+### Réserver (confirmation ou attente)
+POST {{base_url}}/creneaux/{{creneau_id}}/reservations
+Content-Type: application/json
+
+{ "adherent_id": {{adherent_id}} }
+
+### Historique par curseur (suivre links.next)
+GET {{base_url}}/reservations?creneau={{creneau_id}}&limit=1
+
+### Historique offset pour comparaison
+GET {{base_url}}/reservations?creneau={{creneau_id}}&page=1&limit=1
+
+### Fiche réservation
+GET {{base_url}}/reservations/{{reservation_id}}
+
+### Annuler et promouvoir
+PATCH {{base_url}}/reservations/{{reservation_id}}
+Content-Type: application/json
+
+{
+  "statut": "annulee"
+}
+
+### Liste attente et rangs
+GET {{base_url}}/listes_attente?creneau={{creneau_id}}
+
+### Fiche attente
+GET {{base_url}}/listes_attente/{{attente_id}}
+
+### Retirer une attente
+DELETE {{base_url}}/listes_attente/{{attente_id}}
+
+### Abonnements
+GET {{base_url}}/abonnements?limit=5
+
+### Coachs
+GET {{base_url}}/coachs?limit=5
+
+### 422 multi-champs
+POST {{base_url}}/adherents
+Content-Type: application/json
+
+{
+  "nom": "",
+  "email": "invalide"
+}
+
+### 400 JSON illisible
+POST {{base_url}}/adherents
+Content-Type: application/json
+
+{"nom":
+
+### 400 dates non parsables
+GET {{base_url}}/creneaux?from=hier&to=demain
+
+### 404 absent
+GET {{base_url}}/creneaux/2147483647
+
+### 422 PUT incomplet
+PUT {{base_url}}/adherents/{{adherent_id}}
+Content-Type: application/json
+
+{
+  "nom": "Incomplet"
+}

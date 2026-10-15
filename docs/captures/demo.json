@@ -1,0 +1,601 @@
+{
+  "captured_at": "2026-10-15T08:51:40.040Z",
+  "fixture": {
+    "adherents": [
+      81,
+      82,
+      83,
+      84
+    ],
+    "cours": 31,
+    "creneau": 61,
+    "debut": "2026-10-16T18:00:00.000+02:00",
+    "exemple": "POST /creneaux/61/reservations",
+    "corps": {
+      "adherent_id": 81
+    }
+  },
+  "exchanges": [
+    {
+      "label": "Dernière place / client 1",
+      "request": {
+        "method": "POST",
+        "path": "/creneaux/61/reservations",
+        "headers": {},
+        "body": {
+          "adherent_id": 81
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "121",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5",
+          "location": "/reservations/482"
+        },
+        "body": {
+          "id": 482,
+          "creneau_id": 61,
+          "adherent_id": 81,
+          "statut": "confirmee",
+          "cree_le": "2026-10-15T08:51:39.87737+00:00",
+          "motif": null
+        }
+      }
+    },
+    {
+      "label": "Dernière place / client 2",
+      "request": {
+        "method": "POST",
+        "path": "/creneaux/61/reservations",
+        "headers": {},
+        "body": {
+          "adherent_id": 82
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "123",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5",
+          "location": "/listes_attente/484"
+        },
+        "body": {
+          "id": 484,
+          "creneau_id": 61,
+          "adherent_id": 82,
+          "statut": "en_attente",
+          "cree_le": "2026-10-15T08:51:39.918669+00:00",
+          "motif": null
+        }
+      }
+    },
+    {
+      "label": "Lecture cours",
+      "request": {
+        "method": "GET",
+        "path": "/cours/31",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cache-control": "private, no-cache",
+          "connection": "keep-alive",
+          "content-length": "215",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "etag": "\"cours-31-v1\"",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "id": 31,
+          "type": "Démo dernière place",
+          "coach_id": 9,
+          "capacite": 1,
+          "jour_semaine": 5,
+          "heure_debut": "18:00:00",
+          "duree_min": 60,
+          "periode_debut": "2026-10-16",
+          "periode_fin": "2026-11-16",
+          "fuseau": "Europe/Paris",
+          "version": 1
+        }
+      }
+    },
+    {
+      "label": "Cache conditionnel",
+      "request": {
+        "method": "GET",
+        "path": "/cours/31",
+        "headers": {
+          "If-None-Match": "\"cours-31-v1\""
+        }
+      },
+      "response": {
+        "status": 304,
+        "headers": {
+          "cache-control": "private, no-cache",
+          "connection": "keep-alive",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "etag": "\"cours-31-v1\"",
+          "keep-alive": "timeout=5"
+        },
+        "body": null
+      }
+    },
+    {
+      "label": "Modification conditionnelle",
+      "request": {
+        "method": "PATCH",
+        "path": "/cours/31",
+        "headers": {
+          "If-Match": "\"cours-31-v1\""
+        },
+        "body": {
+          "type": "Démo mise à jour"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "212",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "etag": "\"cours-31-v2\"",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "id": 31,
+          "type": "Démo mise à jour",
+          "coach_id": 9,
+          "capacite": 1,
+          "jour_semaine": 5,
+          "heure_debut": "18:00:00",
+          "duree_min": 60,
+          "periode_debut": "2026-10-16",
+          "periode_fin": "2026-11-16",
+          "fuseau": "Europe/Paris",
+          "version": 2
+        }
+      }
+    },
+    {
+      "label": "Version obsolète",
+      "request": {
+        "method": "PATCH",
+        "path": "/cours/31",
+        "headers": {
+          "If-Match": "\"cours-31-v1\""
+        },
+        "body": {
+          "type": "Ancienne version"
+        }
+      },
+      "response": {
+        "status": 412,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "184",
+          "content-type": "application/problem+json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "type": "urn:salle-de-sport:problem:precondition",
+          "title": "Précondition échouée",
+          "status": 412,
+          "detail": "Le cours a changé. Relisez-le avant de le modifier.",
+          "instance": "/cours/31"
+        }
+      }
+    },
+    {
+      "label": "Validation multi-champs",
+      "request": {
+        "method": "POST",
+        "path": "/adherents",
+        "headers": {},
+        "body": {
+          "nom": "",
+          "email": "invalide"
+        }
+      },
+      "response": {
+        "status": 422,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "296",
+          "content-type": "application/problem+json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "type": "urn:salle-de-sport:problem:validation",
+          "title": "Requête invalide",
+          "status": 422,
+          "detail": "Corrigez les champs indiqués.",
+          "instance": "/adherents",
+          "errors": [
+            {
+              "field": "nom",
+              "message": "Too small: expected string to have >=1 characters"
+            },
+            {
+              "field": "email",
+              "message": "Invalid email address"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "Curseur / première page",
+      "request": {
+        "method": "GET",
+        "path": "/reservations?creneau=61&limit=1",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "288",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "data": [
+            {
+              "id": 484,
+              "creneau_id": 61,
+              "adherent_id": 82,
+              "statut": "en_attente",
+              "cree_le": "2026-10-15T08:51:39.918669+00:00",
+              "motif": null
+            }
+          ],
+          "pagination": {
+            "limit": 1
+          },
+          "links": {
+            "next": "/reservations?creneau=61&limit=1&after=eyJ0aW1lIjoiMjAyNi0xMC0xNVQwODo1MTozOS45MTg2NjkrMDA6MDAiLCJpZCI6NDg0fQ"
+          }
+        }
+      }
+    },
+    {
+      "label": "Offset / première page",
+      "request": {
+        "method": "GET",
+        "path": "/reservations?creneau=61&page=1&limit=1",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "249",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "data": [
+            {
+              "id": 484,
+              "creneau_id": 61,
+              "adherent_id": 82,
+              "statut": "en_attente",
+              "cree_le": "2026-10-15T08:51:39.918669+00:00",
+              "motif": null
+            }
+          ],
+          "pagination": {
+            "page": 1,
+            "limit": 1,
+            "total": 2
+          },
+          "links": {
+            "next": "/reservations?creneau=61&page=2&limit=1",
+            "prev": null
+          }
+        }
+      }
+    },
+    {
+      "label": "Insertion entre les pages",
+      "request": {
+        "method": "POST",
+        "path": "/creneaux/61/reservations",
+        "headers": {},
+        "body": {
+          "adherent_id": 83
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "123",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5",
+          "location": "/listes_attente/485"
+        },
+        "body": {
+          "id": 485,
+          "creneau_id": 61,
+          "adherent_id": 83,
+          "statut": "en_attente",
+          "cree_le": "2026-10-15T08:51:39.987956+00:00",
+          "motif": null
+        }
+      }
+    },
+    {
+      "label": "Curseur / page suivante",
+      "request": {
+        "method": "GET",
+        "path": "/reservations?creneau=61&limit=1&after=eyJ0aW1lIjoiMjAyNi0xMC0xNVQwODo1MTozOS45MTg2NjkrMDA6MDAiLCJpZCI6NDg0fQ",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "179",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "data": [
+            {
+              "id": 482,
+              "creneau_id": 61,
+              "adherent_id": 81,
+              "statut": "confirmee",
+              "cree_le": "2026-10-15T08:51:39.87737+00:00",
+              "motif": null
+            }
+          ],
+          "pagination": {
+            "limit": 1
+          },
+          "links": {
+            "next": null
+          }
+        }
+      }
+    },
+    {
+      "label": "Offset / page suivante",
+      "request": {
+        "method": "GET",
+        "path": "/reservations?creneau=61&page=2&limit=1",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "286",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "data": [
+            {
+              "id": 484,
+              "creneau_id": 61,
+              "adherent_id": 82,
+              "statut": "en_attente",
+              "cree_le": "2026-10-15T08:51:39.918669+00:00",
+              "motif": null
+            }
+          ],
+          "pagination": {
+            "page": 2,
+            "limit": 1,
+            "total": 3
+          },
+          "links": {
+            "next": "/reservations?creneau=61&page=3&limit=1",
+            "prev": "/reservations?creneau=61&page=1&limit=1"
+          }
+        }
+      }
+    },
+    {
+      "label": "Création créneau doublon",
+      "request": {
+        "method": "POST",
+        "path": "/cours/31/creneaux",
+        "headers": {},
+        "body": {
+          "debut": "2026-10-16T18:00:00.000Z",
+          "fin": "2026-10-16T19:00:00.000Z"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "106",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "keep-alive": "timeout=5",
+          "location": "/creneaux/62"
+        },
+        "body": {
+          "id": 62,
+          "cours_id": 31,
+          "debut": "2026-10-16T18:00:00+00:00",
+          "fin": "2026-10-16T19:00:00+00:00",
+          "capacite": 1
+        }
+      }
+    },
+    {
+      "label": "Doublon concurrent / client 1",
+      "request": {
+        "method": "POST",
+        "path": "/creneaux/62/reservations",
+        "headers": {},
+        "body": {
+          "adherent_id": 84
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "122",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:40 GMT",
+          "keep-alive": "timeout=5",
+          "location": "/reservations/486"
+        },
+        "body": {
+          "id": 486,
+          "creneau_id": 62,
+          "adherent_id": 84,
+          "statut": "confirmee",
+          "cree_le": "2026-10-15T08:51:40.004593+00:00",
+          "motif": null
+        }
+      }
+    },
+    {
+      "label": "Doublon concurrent / client 2",
+      "request": {
+        "method": "POST",
+        "path": "/creneaux/62/reservations",
+        "headers": {},
+        "body": {
+          "adherent_id": 84
+        }
+      },
+      "response": {
+        "status": 409,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "206",
+          "content-type": "application/problem+json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:40 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "type": "urn:salle-de-sport:problem:conflit",
+          "title": "Conflit métier",
+          "status": 409,
+          "detail": "Une inscription active existe déjà pour cet adhérent et ce créneau.",
+          "instance": "/creneaux/62/reservations"
+        }
+      }
+    },
+    {
+      "label": "Annulation et promotion",
+      "request": {
+        "method": "PATCH",
+        "path": "/reservations/482",
+        "headers": {},
+        "body": {
+          "statut": "annulee"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "119",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:40 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "id": 482,
+          "creneau_id": 61,
+          "adherent_id": 81,
+          "statut": "annulee",
+          "cree_le": "2026-10-15T08:51:39.87737+00:00",
+          "motif": null
+        }
+      }
+    },
+    {
+      "label": "Planning final",
+      "request": {
+        "method": "GET",
+        "path": "/creneaux?cours=31&tri=debut,id",
+        "headers": {}
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cache-control": "no-store",
+          "connection": "keep-alive",
+          "content-length": "381",
+          "content-type": "application/json; charset=utf-8",
+          "date": "Thu, 15 Oct 2026 08:51:40 GMT",
+          "keep-alive": "timeout=5"
+        },
+        "body": {
+          "data": [
+            {
+              "id": 61,
+              "cours_id": 31,
+              "debut": "2026-10-16T16:00:00+00:00",
+              "fin": "2026-10-16T17:00:00+00:00",
+              "capacite": 1,
+              "places_prises": 1,
+              "places_restantes": 0
+            },
+            {
+              "id": 62,
+              "cours_id": 31,
+              "debut": "2026-10-16T18:00:00+00:00",
+              "fin": "2026-10-16T19:00:00+00:00",
+              "capacite": 1,
+              "places_prises": 1,
+              "places_restantes": 0
+            }
+          ],
+          "pagination": {
+            "page": 1,
+            "limit": 20,
+            "total": 2
+          },
+          "links": {
+            "next": null,
+            "prev": null
+          }
+        }
+      }
+    }
+  ]
+}
