@@ -1,6 +1,6 @@
 # Remplacer les identifiants/dates avec la sortie de la démonstration.
 # Pour les CRUD, utiliser une ressource créée pour ce parcours, sans historique.
-@base_url = http://192.168.50.117:3000
+@base_url = http://localhost:3000
 @adherent_id = 1
 @cours_id = 1
 @coach_id = 1

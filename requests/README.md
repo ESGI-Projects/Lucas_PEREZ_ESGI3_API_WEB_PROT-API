@@ -8,13 +8,13 @@
 
 L'import de collections Postman est documenté par
 [Kong / Insomnia](https://developer.konghq.com/insomnia/import-export/).
-L'import graphique n'a pas été exécuté dans cet environnement sans interface.
 
-Lancer d'abord `docker compose up --build -d api`, puis
-`docker compose --profile tools run --build --rm demo`.
-Reporter les identifiants affichés, le jour local et les instants du créneau dans
+Lancer d'abord `docker compose up --build -d api`. Pour les dossiers 01 à 06,
+`docker compose --profile tools run --build --rm demo` crée des données neuves :
+reporter les identifiants affichés, le jour local et les instants du créneau dans
 les variables de la collection. Pour les ETag, lire la fiche et copier l'en-tête
 exact, guillemets compris ; après une modification réussie, l'ancien tag donne 412.
+Le dossier de démo ci-dessous n'a pas besoin de cette étape.
 
 Les valeurs initiales des variables sont des exemples, pas des identifiants
 universels. Pour démontrer les suppressions CRUD, créer des ressources dédiées
@@ -27,15 +27,20 @@ La concurrence se démontre par le script, qui lance les requêtes avec
 `Promise.all`, plutôt que par deux clics successifs. Les tests ajoutent le cas du
 quota sur deux créneaux différents et les annulations concurrentes.
 
-## Accès depuis le PC via VPN
+## Démo de soutenance
 
-La VM actuelle du LAB a l'adresse privée `192.168.50.117`.
-La variable `base_url` de la collection est préconfigurée sur
-`http://192.168.50.117:3000`. Dans une collection déjà importée, modifier cette
-variable dans Insomnia : le fichier JSON ne met pas à jour l'import existant.
-Tester d'abord `GET http://192.168.50.117:3000/health` depuis le PC connecté au VPN.
+La variable `base_url` de la collection vaut `http://localhost:3000`.
+Dans une collection déjà importée, la modifier dans Insomnia : le fichier JSON ne
+met pas à jour un import existant.
 
-La configuration locale `.env` de la VM fixe `API_BIND_ADDRESS=192.168.50.117`.
-Le défaut du dépôt reste `127.0.0.1` pour un lancement local. Sur un autre poste,
-adapter l'adresse d'écoute et la variable du client. Si l'adresse DHCP de la VM
-change, adapter ces deux valeurs ; une réservation DHCP permet de la stabiliser.
+Le dossier `★ Démo soutenance (dans l'ordre)` regroupe les requêtes D00 à D12 dans
+l'ordre du passage : santé, CRUD adhérent, ETag, planning paginé, erreurs 422 et
+400, puis cache 304 et 412. Il suppose une base neuve
+(`docker compose --profile test --profile tools down -v`, puis
+`docker compose up --build -d api`) : l'adhérent créé porte alors l'id 81
+(variable `demo_adherent`) et le cours 1 est en version 1 (variable `etag` =
+`"cours-1-v1"`). Sinon, reporter l'id renvoyé dans `Location` et l'ETag affiché
+par D06 dans ces deux variables.
+
+Le planning filtre le coach 8 le 2026-10-06 avec `limit=2` : les créneaux 8 et 9
+commencent tous deux à 10:15, l'id les départage entre la page 1 et la page 2.

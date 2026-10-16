@@ -1,7 +1,16 @@
 # API Salle de sport
 
-Projet individuel Web API — séances 1 à 4. TypeScript, Express, PostgreSQL,
-Docker Compose ; client de démonstration : Insomnia ou fichier HTTP.
+Projet individuel Web API — séances 1 à 4.
+
+## Sujet fil rouge
+
+Sujet n° 3 — Salle de sport.
+
+## Stack
+
+Langage : TypeScript (Node 24) / Framework HTTP : Express / Base : PostgreSQL 18 /
+Client HTTP : Insomnia (collection importable) ou fichier `.http` /
+Lancement : Docker Compose.
 
 ## Démarrer
 
@@ -11,16 +20,13 @@ Prérequis : Docker Engine et Docker Compose. Aucun Node ni PostgreSQL local req
 docker compose up --build -d api
 ```
 
-En configuration locale par défaut : http://localhost:3000, contrôle `/health`.
-Sur la VM actuelle du LAB, l'API est publiée sur **http://192.168.50.117:3000**
-pour le PC connecté au VPN ; contrôle : http://192.168.50.117:3000/health.
-La variable locale `API_BIND_ADDRESS` choisit l'adresse de publication Docker
-(`127.0.0.1` par défaut, IP privée de la VM pour le LAB). Après un changement,
-relancer `docker compose up -d api`. L'accès VPN doit autoriser TCP 3000 vers la VM.
+URL de base : http://localhost:3000, contrôle `/health`.
+La variable `API_BIND_ADDRESS` choisit l'adresse de publication Docker
+(`127.0.0.1` par défaut). Après un changement, relancer `docker compose up -d api`.
 La base est initialisée, le kit est chargé et les migrations sont appliquées avant
 le démarrage de l'API. Les données restent dans un volume nommé.
 
-Les valeurs locales par défaut fonctionnent sans `.env`. Le fichier `.env` existant
+Les valeurs locales par défaut fonctionnent sans `.env`. Un fichier `.env` éventuel
 est pris en compte ; `.env.example` décrit les paramètres. Pour un conflit de ports,
 modifier `API_PORT` ou `DB_PORT`. Les identifiants proposés sont réservés au développement local.
 
@@ -131,9 +137,3 @@ docker compose --profile test down -v
 **Cette commande supprime le volume de la base et toutes ses données.** Le prochain
 démarrage recréera le schéma et chargera le kit. Aucun reset n'est nécessaire pour
 mettre le code à jour ou ajouter une migration.
-
-## Soutenance
-
-Le parcours de dix minutes et les questions d'entraînement figurent dans
-[`docs/soutenance.md`](docs/soutenance.md). Le cadrage validé est conservé dans
-[`docs/cadrage.md`](docs/cadrage.md).

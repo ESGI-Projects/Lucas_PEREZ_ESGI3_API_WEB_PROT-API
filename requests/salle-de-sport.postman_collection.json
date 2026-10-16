@@ -78,12 +78,8 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/health",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "health"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["health"]
             },
             "description": "Lancement (critère 1). Attendu : 200 {\"status\":\"ok\"}."
           }
@@ -100,12 +96,8 @@
             ],
             "url": {
               "raw": "{{base_url}}/adherents",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "adherents"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["adherents"]
             },
             "description": "Slide 7. Attendu : 201, en-tête Location: /adherents/81. Si l'id n'est pas 81 : le reporter dans la variable demo_adherent.",
             "body": {
@@ -131,13 +123,8 @@
             ],
             "url": {
               "raw": "{{base_url}}/adherents/{{demo_adherent}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "adherents",
-                "{{demo_adherent}}"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["adherents", "{{demo_adherent}}"]
             },
             "description": "Attendu : 200, nom et email remplacés.",
             "body": {
@@ -163,13 +150,8 @@
             ],
             "url": {
               "raw": "{{base_url}}/adherents/{{demo_adherent}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "adherents",
-                "{{demo_adherent}}"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["adherents", "{{demo_adherent}}"]
             },
             "description": "Attendu : 200, nom changé, email identique.",
             "body": {
@@ -190,13 +172,8 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/adherents/{{demo_adherent}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "adherents",
-                "{{demo_adherent}}"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["adherents", "{{demo_adherent}}"]
             },
             "description": "Attendu : 204 sans corps."
           }
@@ -208,13 +185,8 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/adherents/{{demo_adherent}}",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "adherents",
-                "{{demo_adherent}}"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["adherents", "{{demo_adherent}}"]
             },
             "description": "Attendu : 404 en application/problem+json."
           }
@@ -226,13 +198,8 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/cours/1",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "cours",
-                "1"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["cours", "1"]
             },
             "description": "Attendu : 200, en-tête ETag: \"cours-1-v1\"."
           }
@@ -244,12 +211,8 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/creneaux?coach=8&jour=2026-10-06&tri=debut,id&ordre=asc&limit=2",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "creneaux"
-              ],
+              "host": ["{{base_url}}"],
+              "path": ["creneaux"],
               "query": [
                 {
                   "key": "coach",
@@ -283,12 +246,8 @@
             "header": [],
             "url": {
               "raw": "{{base_url}}/creneaux?coach=8&jour=2026-10-06&tri=debut%2Cid&ordre=asc&limit=2&page=2",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "creneaux"
-              ],
+              "host": ["{{base_url}}"],
+              "path": ["creneaux"],
               "query": [
                 {
                   "key": "coach",
@@ -331,12 +290,8 @@
             ],
             "url": {
               "raw": "{{base_url}}/adherents",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "adherents"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["adherents"]
             },
             "description": "Slide 8. Attendu : 422, errors sur nom et email.",
             "body": {
@@ -362,12 +317,8 @@
             ],
             "url": {
               "raw": "{{base_url}}/adherents",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "adherents"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["adherents"]
             },
             "description": "Attendu : 400, title JSON illisible.",
             "body": {
@@ -393,13 +344,8 @@
             ],
             "url": {
               "raw": "{{base_url}}/cours/1",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "cours",
-                "1"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["cours", "1"]
             },
             "description": "Slide 10. Attendu : 304 sans corps."
           }
@@ -420,13 +366,8 @@
             ],
             "url": {
               "raw": "{{base_url}}/cours/1",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "cours",
-                "1"
-              ]
+              "host": ["{{base_url}}"],
+              "path": ["cours", "1"]
             },
             "description": "Envoyer deux fois. 1re : 200 et ETag \"cours-1-v2\". 2e : 412 Précondition échouée.",
             "body": {

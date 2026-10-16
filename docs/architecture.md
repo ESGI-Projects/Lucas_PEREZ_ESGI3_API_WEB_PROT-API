@@ -36,8 +36,8 @@ sérialisable détecte les lectures devenues incompatibles, notamment si le snap
 a été pris avant l'attente d'un verrou. Une transaction annulée par PostgreSQL
 est intégralement rejouée, avec un nouveau snapshot.
 
-`40001` (sérialisation) et `40P01` (interblocage) sont repris au maximum cinq fois,
-avec une courte attente variable. Si le conflit persiste, réponse 503 et
+`40001` (sérialisation) et `40P01` (interblocage) déclenchent une reprise, dans la limite
+de cinq tentatives au total, avec une courte attente variable. Si le conflit persiste, réponse 503 et
 `Retry-After: 1`. Aucun effet externe ni réponse HTTP n'est émis dans le callback
 rejouable. Les conflits métier, eux, renvoient 409 sans reprise automatique.
 

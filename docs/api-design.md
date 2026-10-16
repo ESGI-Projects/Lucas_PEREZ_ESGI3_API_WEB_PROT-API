@@ -1,7 +1,6 @@
 # Conception de l'API — Salle de sport
 
-Périmètre : séances 1 à 4. Le cadrage fonctionnel validé est dans `cadrage.md`.
-Le brouillon initial est conservé dans `archives/api-design-initial.md`.
+Périmètre : séances 1 à 4.
 
 ## Ressources et modèle de données
 
@@ -90,9 +89,11 @@ Offset : `page=1`, `limit=20` par défaut, limite de 100 et page maximale 100000
 `links.next` et `links.prev` valent une URI relative ou null et conservent les filtres.
 
 ```http
-GET /creneaux?cours=1&coach=2&jour=2026-10-16&tri=debut,id&ordre=asc&page=1&limit=10
+GET /creneaux?coach=8&jour=2026-10-06&tri=debut,id&ordre=asc&page=1&limit=2
 ```
 
+Avec le kit, cet exemple renvoie les créneaux 6 et 8, puis 9 en page 2 : les créneaux
+8 et 9 commencent tous deux à 10:15 et l'id les départage.
 Les filtres sont optionnels et combinables ; `jour` est une date de Paris.
 `from` inclusif et `to` exclusif filtrent les instants de début.
 Tris acceptés : `debut,id` (défaut), `fin,id`, `id` ; ordre asc ou desc.
@@ -152,7 +153,7 @@ consultable dans `/reservations/{id}`.
 
 400 concerne la syntaxe JSON ou les paramètres mal formés. 422 concerne les champs
 d'un corps lisible. 409 concerne un conflit avec l'état courant : doublon, quota,
-abonnement ou fenêtre. Ce choix pour le quota diffère de l'exemple de S3 mais suit
+abonnement ou fenêtre. Ce choix pour le quota et la fenêtre diffère de l'exemple de S3 mais suit
 la distinction explicitée en S4 : la même intention pourrait réussir dans un autre
 état. Aucune stack trace ni message SQL interne n'est exposé.
 

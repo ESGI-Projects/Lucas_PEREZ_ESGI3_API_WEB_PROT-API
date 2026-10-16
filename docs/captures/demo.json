@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-10-15T08:51:40.040Z",
+  "captured_at": "2026-10-16T08:26:57.486Z",
   "fixture": {
     "adherents": [
       81,
@@ -9,7 +9,7 @@
     ],
     "cours": 31,
     "creneau": 61,
-    "debut": "2026-10-16T18:00:00.000+02:00",
+    "debut": "2026-10-17T18:00:00.000+02:00",
     "exemple": "POST /creneaux/61/reservations",
     "corps": {
       "adherent_id": 81
@@ -31,9 +31,9 @@
         "headers": {
           "cache-control": "no-store",
           "connection": "keep-alive",
-          "content-length": "121",
+          "content-length": "122",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5",
           "location": "/reservations/482"
         },
@@ -42,7 +42,7 @@
           "creneau_id": 61,
           "adherent_id": 81,
           "statut": "confirmee",
-          "cree_le": "2026-10-15T08:51:39.87737+00:00",
+          "cree_le": "2026-10-16T08:26:57.268579+00:00",
           "motif": null
         }
       }
@@ -64,7 +64,7 @@
           "connection": "keep-alive",
           "content-length": "123",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5",
           "location": "/listes_attente/484"
         },
@@ -73,7 +73,7 @@
           "creneau_id": 61,
           "adherent_id": 82,
           "statut": "en_attente",
-          "cree_le": "2026-10-15T08:51:39.918669+00:00",
+          "cree_le": "2026-10-16T08:26:57.320944+00:00",
           "motif": null
         }
       }
@@ -92,7 +92,7 @@
           "connection": "keep-alive",
           "content-length": "215",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "etag": "\"cours-31-v1\"",
           "keep-alive": "timeout=5"
         },
@@ -101,11 +101,11 @@
           "type": "Démo dernière place",
           "coach_id": 9,
           "capacite": 1,
-          "jour_semaine": 5,
+          "jour_semaine": 6,
           "heure_debut": "18:00:00",
           "duree_min": 60,
-          "periode_debut": "2026-10-16",
-          "periode_fin": "2026-11-16",
+          "periode_debut": "2026-10-17",
+          "periode_fin": "2026-11-17",
           "fuseau": "Europe/Paris",
           "version": 1
         }
@@ -125,7 +125,7 @@
         "headers": {
           "cache-control": "private, no-cache",
           "connection": "keep-alive",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "etag": "\"cours-31-v1\"",
           "keep-alive": "timeout=5"
         },
@@ -151,7 +151,7 @@
           "connection": "keep-alive",
           "content-length": "212",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "etag": "\"cours-31-v2\"",
           "keep-alive": "timeout=5"
         },
@@ -160,11 +160,11 @@
           "type": "Démo mise à jour",
           "coach_id": 9,
           "capacite": 1,
-          "jour_semaine": 5,
+          "jour_semaine": 6,
           "heure_debut": "18:00:00",
           "duree_min": 60,
-          "periode_debut": "2026-10-16",
-          "periode_fin": "2026-11-16",
+          "periode_debut": "2026-10-17",
+          "periode_fin": "2026-11-17",
           "fuseau": "Europe/Paris",
           "version": 2
         }
@@ -189,7 +189,7 @@
           "connection": "keep-alive",
           "content-length": "184",
           "content-type": "application/problem+json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -219,7 +219,7 @@
           "connection": "keep-alive",
           "content-length": "296",
           "content-type": "application/problem+json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -255,7 +255,7 @@
           "connection": "keep-alive",
           "content-length": "288",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -265,7 +265,7 @@
               "creneau_id": 61,
               "adherent_id": 82,
               "statut": "en_attente",
-              "cree_le": "2026-10-15T08:51:39.918669+00:00",
+              "cree_le": "2026-10-16T08:26:57.320944+00:00",
               "motif": null
             }
           ],
@@ -273,7 +273,7 @@
             "limit": 1
           },
           "links": {
-            "next": "/reservations?creneau=61&limit=1&after=eyJ0aW1lIjoiMjAyNi0xMC0xNVQwODo1MTozOS45MTg2NjkrMDA6MDAiLCJpZCI6NDg0fQ"
+            "next": "/reservations?creneau=61&limit=1&after=eyJ0aW1lIjoiMjAyNi0xMC0xNlQwODoyNjo1Ny4zMjA5NDQrMDA6MDAiLCJpZCI6NDg0fQ"
           }
         }
       }
@@ -292,7 +292,7 @@
           "connection": "keep-alive",
           "content-length": "249",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -302,7 +302,7 @@
               "creneau_id": 61,
               "adherent_id": 82,
               "statut": "en_attente",
-              "cree_le": "2026-10-15T08:51:39.918669+00:00",
+              "cree_le": "2026-10-16T08:26:57.320944+00:00",
               "motif": null
             }
           ],
@@ -335,7 +335,7 @@
           "connection": "keep-alive",
           "content-length": "123",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5",
           "location": "/listes_attente/485"
         },
@@ -344,7 +344,7 @@
           "creneau_id": 61,
           "adherent_id": 83,
           "statut": "en_attente",
-          "cree_le": "2026-10-15T08:51:39.987956+00:00",
+          "cree_le": "2026-10-16T08:26:57.384239+00:00",
           "motif": null
         }
       }
@@ -353,7 +353,7 @@
       "label": "Curseur / page suivante",
       "request": {
         "method": "GET",
-        "path": "/reservations?creneau=61&limit=1&after=eyJ0aW1lIjoiMjAyNi0xMC0xNVQwODo1MTozOS45MTg2NjkrMDA6MDAiLCJpZCI6NDg0fQ",
+        "path": "/reservations?creneau=61&limit=1&after=eyJ0aW1lIjoiMjAyNi0xMC0xNlQwODoyNjo1Ny4zMjA5NDQrMDA6MDAiLCJpZCI6NDg0fQ",
         "headers": {}
       },
       "response": {
@@ -361,9 +361,9 @@
         "headers": {
           "cache-control": "no-store",
           "connection": "keep-alive",
-          "content-length": "179",
+          "content-length": "180",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -373,7 +373,7 @@
               "creneau_id": 61,
               "adherent_id": 81,
               "statut": "confirmee",
-              "cree_le": "2026-10-15T08:51:39.87737+00:00",
+              "cree_le": "2026-10-16T08:26:57.268579+00:00",
               "motif": null
             }
           ],
@@ -400,7 +400,7 @@
           "connection": "keep-alive",
           "content-length": "286",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -410,7 +410,7 @@
               "creneau_id": 61,
               "adherent_id": 82,
               "statut": "en_attente",
-              "cree_le": "2026-10-15T08:51:39.918669+00:00",
+              "cree_le": "2026-10-16T08:26:57.320944+00:00",
               "motif": null
             }
           ],
@@ -433,8 +433,8 @@
         "path": "/cours/31/creneaux",
         "headers": {},
         "body": {
-          "debut": "2026-10-16T18:00:00.000Z",
-          "fin": "2026-10-16T19:00:00.000Z"
+          "debut": "2026-10-17T18:00:00.000Z",
+          "fin": "2026-10-17T19:00:00.000Z"
         }
       },
       "response": {
@@ -444,15 +444,15 @@
           "connection": "keep-alive",
           "content-length": "106",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:39 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5",
           "location": "/creneaux/62"
         },
         "body": {
           "id": 62,
           "cours_id": 31,
-          "debut": "2026-10-16T18:00:00+00:00",
-          "fin": "2026-10-16T19:00:00+00:00",
+          "debut": "2026-10-17T18:00:00+00:00",
+          "fin": "2026-10-17T19:00:00+00:00",
           "capacite": 1
         }
       }
@@ -474,7 +474,7 @@
           "connection": "keep-alive",
           "content-length": "122",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:40 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5",
           "location": "/reservations/486"
         },
@@ -483,7 +483,7 @@
           "creneau_id": 62,
           "adherent_id": 84,
           "statut": "confirmee",
-          "cree_le": "2026-10-15T08:51:40.004593+00:00",
+          "cree_le": "2026-10-16T08:26:57.427352+00:00",
           "motif": null
         }
       }
@@ -505,7 +505,7 @@
           "connection": "keep-alive",
           "content-length": "206",
           "content-type": "application/problem+json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:40 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -532,9 +532,9 @@
         "headers": {
           "cache-control": "no-store",
           "connection": "keep-alive",
-          "content-length": "119",
+          "content-length": "120",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:40 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -542,7 +542,7 @@
           "creneau_id": 61,
           "adherent_id": 81,
           "statut": "annulee",
-          "cree_le": "2026-10-15T08:51:39.87737+00:00",
+          "cree_le": "2026-10-16T08:26:57.268579+00:00",
           "motif": null
         }
       }
@@ -561,7 +561,7 @@
           "connection": "keep-alive",
           "content-length": "381",
           "content-type": "application/json; charset=utf-8",
-          "date": "Thu, 15 Oct 2026 08:51:40 GMT",
+          "date": "Fri, 16 Oct 2026 08:26:57 GMT",
           "keep-alive": "timeout=5"
         },
         "body": {
@@ -569,8 +569,8 @@
             {
               "id": 61,
               "cours_id": 31,
-              "debut": "2026-10-16T16:00:00+00:00",
-              "fin": "2026-10-16T17:00:00+00:00",
+              "debut": "2026-10-17T16:00:00+00:00",
+              "fin": "2026-10-17T17:00:00+00:00",
               "capacite": 1,
               "places_prises": 1,
               "places_restantes": 0
@@ -578,8 +578,8 @@
             {
               "id": 62,
               "cours_id": 31,
-              "debut": "2026-10-16T18:00:00+00:00",
-              "fin": "2026-10-16T19:00:00+00:00",
+              "debut": "2026-10-17T18:00:00+00:00",
+              "fin": "2026-10-17T19:00:00+00:00",
               "capacite": 1,
               "places_prises": 1,
               "places_restantes": 0
