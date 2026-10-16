@@ -7,7 +7,12 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://192.168.50.117:3000",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "demo_adherent",
+      "value": "81",
       "type": "string"
     },
     {
@@ -62,6 +67,381 @@
     }
   ],
   "item": [
+    {
+      "name": "★ Démo soutenance (dans l'ordre)",
+      "description": "Ordre exact du passage. Base neuve obligatoire (docker compose down -v avant la séance) : l'adhérent créé porte alors l'id 81 et le cours 1 est en version 1.",
+      "item": [
+        {
+          "name": "D00 · Santé",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Lancement (critère 1). Attendu : 200 {\"status\":\"ok\"}."
+          }
+        },
+        {
+          "name": "D01 · Créer un adhérent (201 + Location)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/adherents",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "adherents"
+              ]
+            },
+            "description": "Slide 7. Attendu : 201, en-tête Location: /adherents/81. Si l'id n'est pas 81 : le reporter dans la variable demo_adherent.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Camille Démo\",\n  \"email\": \"camille-demo@example.org\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D02 · Remplacer intégralement (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/adherents/{{demo_adherent}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "adherents",
+                "{{demo_adherent}}"
+              ]
+            },
+            "description": "Attendu : 200, nom et email remplacés.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Camille Remplacement\",\n  \"email\": \"camille-remplacement@example.org\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D03 · Modifier le nom seulement (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/adherents/{{demo_adherent}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "adherents",
+                "{{demo_adherent}}"
+              ]
+            },
+            "description": "Attendu : 200, nom changé, email identique.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Camille Modification\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D04 · Supprimer (204)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/adherents/{{demo_adherent}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "adherents",
+                "{{demo_adherent}}"
+              ]
+            },
+            "description": "Attendu : 204 sans corps."
+          }
+        },
+        {
+          "name": "D05 · Relire la fiche (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/adherents/{{demo_adherent}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "adherents",
+                "{{demo_adherent}}"
+              ]
+            },
+            "description": "Attendu : 404 en application/problem+json."
+          }
+        },
+        {
+          "name": "D06 · Fiche cours et ETag",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/cours/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "cours",
+                "1"
+              ]
+            },
+            "description": "Attendu : 200, en-tête ETag: \"cours-1-v1\"."
+          }
+        },
+        {
+          "name": "D07 · Planning filtré et trié (page 1)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/creneaux?coach=8&jour=2026-10-06&tri=debut,id&ordre=asc&limit=2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "creneaux"
+              ],
+              "query": [
+                {
+                  "key": "coach",
+                  "value": "8"
+                },
+                {
+                  "key": "jour",
+                  "value": "2026-10-06"
+                },
+                {
+                  "key": "tri",
+                  "value": "debut,id"
+                },
+                {
+                  "key": "ordre",
+                  "value": "asc"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                }
+              ]
+            },
+            "description": "Attendu : créneaux 6 et 8, total 3, links.next renseigné. Les créneaux 8 et 9 commencent tous deux à 10:15 : l'id les départage."
+          }
+        },
+        {
+          "name": "D08 · Page suivante (links.next)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/creneaux?coach=8&jour=2026-10-06&tri=debut%2Cid&ordre=asc&limit=2&page=2",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "creneaux"
+              ],
+              "query": [
+                {
+                  "key": "coach",
+                  "value": "8"
+                },
+                {
+                  "key": "jour",
+                  "value": "2026-10-06"
+                },
+                {
+                  "key": "tri",
+                  "value": "debut%2Cid"
+                },
+                {
+                  "key": "ordre",
+                  "value": "asc"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                },
+                {
+                  "key": "page",
+                  "value": "2"
+                }
+              ]
+            },
+            "description": "Copie de links.next. Attendu : créneau 9 seul, mêmes filtres, links.prev renseigné."
+          }
+        },
+        {
+          "name": "D09 · 422 multi-champs",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/adherents",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "adherents"
+              ]
+            },
+            "description": "Slide 8. Attendu : 422, errors sur nom et email.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"\",\n  \"email\": \"invalide\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D10 · 400 JSON illisible (si avance)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/adherents",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "adherents"
+              ]
+            },
+            "description": "Attendu : 400, title JSON illisible.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nom\":",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "D11 · Cache 304",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "If-None-Match",
+                "value": "{{etag}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cours/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "cours",
+                "1"
+              ]
+            },
+            "description": "Slide 10. Attendu : 304 sans corps."
+          }
+        },
+        {
+          "name": "D12 · Modification conditionnelle (200, puis 412 au rejeu)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "If-Match",
+                "value": "{{etag}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cours/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "cours",
+                "1"
+              ]
+            },
+            "description": "Envoyer deux fois. 1re : 200 et ETag \"cours-1-v2\". 2e : 412 Précondition échouée.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Yoga conditionnel\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     {
       "name": "00 - Démarrage",
       "item": [
