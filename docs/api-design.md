@@ -1,5 +1,7 @@
 # Conception de l'API — Salle de sport
 
+Lucas PEREZ — ESGI 3ᵉ année (3ESGI-AL), Campus Skolae — module Web API, 2026–2027.
+
 Périmètre : séances 1 à 4.
 
 ## Ressources et modèle de données

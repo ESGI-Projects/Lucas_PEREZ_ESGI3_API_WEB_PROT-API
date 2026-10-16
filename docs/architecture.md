@@ -1,5 +1,7 @@
 # Architecture et garanties
 
+Lucas PEREZ — ESGI 3ᵉ année (3ESGI-AL), Campus Skolae — module Web API, 2026–2027.
+
 ## Organisation
 
 Le projet est un monolithe modulaire : une seule application et une seule base,

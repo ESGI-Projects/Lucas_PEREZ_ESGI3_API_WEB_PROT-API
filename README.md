@@ -2,6 +2,11 @@
 
 Projet individuel Web API — séances 1 à 4.
 
+- Auteur : Lucas PEREZ
+- École : ESGI, Campus Skolae — 3ᵉ année, classe 3ESGI-AL
+- Module : Web API, projet fil rouge — formateur : Nicolas FAESSEL
+- Année : 2026–2027
+
 ## Sujet fil rouge
 
 Sujet n° 3 — Salle de sport.
